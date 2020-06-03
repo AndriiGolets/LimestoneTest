@@ -21,6 +21,8 @@ public class LimestoneDigital {
         System.out.println(daysOfWeekSort(12367));
         System.out.println(daysOfWeekSort(134567));
         System.out.println(daysOfWeekSort(133334567));
+        System.out.println(daysOfWeekSort(76541));
+        System.out.println(daysOfWeekSort(777776541));
     }
 
     public static String daysOfWeekSort(Integer unsortedDays) {
@@ -35,6 +37,10 @@ public class LimestoneDigital {
                 .reduce((a, b) -> a + "," + b).orElse("Error");
     }
 
+    /**
+     * Grouping consequent int values and add to List
+     * result will look like {1,345,7}
+     * */
     private static List<StringBuffer> groupConsequent(Set<String> orderedSet) {
         List<StringBuffer> consequentGroups = new ArrayList<>();
 
