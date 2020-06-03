@@ -29,6 +29,13 @@ public class LimestoneDigital {
                 .chars().boxed()
                 .filter(i -> checkInputValues(i))
                 .map(i -> String.valueOf(i - CHAR_0)).collect(Collectors.toCollection(TreeSet::new));
+
+        return groupConsequent(orderedSet).stream()
+                .map(s -> groupWithDash(s))
+                .reduce((a, b) -> a + "," + b).orElse("Error");
+    }
+
+    private static List<StringBuffer> groupConsequent(Set<String> orderedSet) {
         List<StringBuffer> consequentGroups = new ArrayList<>();
 
         int last = 0;
@@ -41,10 +48,11 @@ public class LimestoneDigital {
             }
             last = si;
         }
+        return consequentGroups;
+    }
 
-        return consequentGroups.stream()
-                .map(s -> s.length() > 1 ? s.substring(0, 1) + "-" + s.substring(s.length() - 1) : s.toString())
-                .reduce((a, b) -> a + "," + b).orElse("Error");
+    private static String groupWithDash(StringBuffer s) {
+        return s.length() > 1 ? s.substring(0, 1) + "-" + s.substring(s.length() - 1) : s.toString();
     }
 
     private static boolean checkInputValues(Integer i) {
